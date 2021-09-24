@@ -18,7 +18,7 @@ pub async fn get_single_record<'conn>(
 ) -> crate::Result<Option<SingleRecord>> {
     let coll = database.collection(model.db_name());
     let meta_mapping = output_meta::from_selected_fields(selected_fields);
-    let (filter, _) = convert_filter(filter.clone(), false)?.render();
+    let (filter, _) = convert_filter(filter.clone(), false, false)?.render();
     let find_options = FindOptions::builder()
         .projection(selected_fields.clone().into_bson()?.into_document()?)
         .build();
